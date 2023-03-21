@@ -7,11 +7,21 @@ public class ReplyDTO {
     private String reply;
     private List<String> roomsYouCanEnter;
     private List<String> inventory;
+    private int gameId;
 
-    public ReplyDTO(String reply, List<String> roomsYouCanEnter, List<String> inventory) {
+    public int getGameId() {
+        return gameId;
+    }
+
+    public void setGameId(int gameId) {
+        this.gameId = gameId;
+    }
+
+    public ReplyDTO(String reply, List<String> roomsYouCanEnter, List<String> inventory, int gameId) {
         this.reply = reply;
         this.roomsYouCanEnter = roomsYouCanEnter;
         this.inventory = inventory;
+        this.gameId = gameId;
     }
 
     public ReplyDTO(String reply) {

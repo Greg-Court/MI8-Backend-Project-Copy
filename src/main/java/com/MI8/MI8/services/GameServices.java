@@ -42,7 +42,7 @@ public class GameServices {
         game.getCurrentRoom().setHaveEnteredRoom(true);
         gameRepo.save(game);
         playerRepo.save(player);
-        ReplyDTO reply = new ReplyDTO(game.getCurrentRoom().getFirstEntranceMessage(),game.getCurrentRoom().getNextRooms(),itemService.getItemNames(game));
+        ReplyDTO reply = new ReplyDTO(game.getCurrentRoom().getFirstEntranceMessage(),game.getCurrentRoom().getNextRooms(),itemService.getItemNames(game), game.getId());
         return reply;
     }
 
@@ -59,7 +59,7 @@ public class GameServices {
                     "returning to MI8 HQ for your next briefing agent.");
             return new ResponseEntity<>(winReply, HttpStatus.OK);
         }
-        ReplyDTO reply = new ReplyDTO("",roomEntering.getNextRooms(),itemService.getItemNames(currentGame));
+        ReplyDTO reply = new ReplyDTO("",roomEntering.getNextRooms(),itemService.getItemNames(currentGame), gameId);
         if (roomEntering.getHaveEnteredRoom()){
             reply.setReply(roomEntering.getRoomDescription());
             return new ResponseEntity<>(reply, HttpStatus.OK);

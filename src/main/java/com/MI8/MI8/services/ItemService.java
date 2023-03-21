@@ -60,15 +60,15 @@ public class ItemService {
         Room roomIn = player.getGame().getCurrentRoom();
         //check the item exists:
         if (itemToUse == null) {
-            return new ResponseEntity<>(new ReplyDTO("That item doesn't exist", roomRepo.findByRoomName(roomIn.getRoomName()).get().getNextRooms(), getItemNames(player.getGame())), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(new ReplyDTO("That item doesn't exist", roomRepo.findByRoomName(roomIn.getRoomName()).get().getNextRooms(), getItemNames(player.getGame()), player.getGame().getId()), HttpStatus.NOT_FOUND);
         }
         //check the player has the item:
         if (!player.getInventory().contains(itemToUse)) {
-            return new ResponseEntity<>(new ReplyDTO("You don't have that item", roomRepo.findByRoomName(roomIn.getRoomName()).get().getNextRooms(), getItemNames(player.getGame())), HttpStatus.OK);
+            return new ResponseEntity<>(new ReplyDTO("You don't have that item", roomRepo.findByRoomName(roomIn.getRoomName()).get().getNextRooms(), getItemNames(player.getGame()), player.getGame().getId()), HttpStatus.OK);
         }
         //check the item can be used here:
         if (!itemToUse.getRoomCanBeUsedIn().contains(roomIn)) {
-            return new ResponseEntity<>(new ReplyDTO("You can't think of a useful way to use that here", roomRepo.findByRoomName(roomIn.getRoomName()).get().getNextRooms(), getItemNames(player.getGame())), HttpStatus.METHOD_NOT_ALLOWED);
+            return new ResponseEntity<>(new ReplyDTO("You can't think of a useful way to use that here", roomRepo.findByRoomName(roomIn.getRoomName()).get().getNextRooms(), getItemNames(player.getGame()), player.getGame().getId()), HttpStatus.METHOD_NOT_ALLOWED);
         }
         ReplyDTO reply = new ReplyDTO();
         reply.setInventory(ItemService.getItemNames(player.getGame()));
