@@ -51,8 +51,8 @@ public class GameServices {
         Game currentGame = gameRepo.findById(gameId).get();
         Room roomEntering = roomRepo.findByRoomName(room).get();
         currentGame.setCurrentRoom(roomEntering);
-        gameRepo.save(currentGame);
         winConditionServices.winningCondition(currentGame);
+        gameRepo.save(currentGame);
         if (currentGame.isPlayerHasWon()){
             ReplyDTO winReply = new ReplyDTO("Well done! You have successfully managed to cripple Specter's growing criminal influence across the globe, whilst they remain at large," +
                     " your accomplishments will get us one step closer to stopping their nefarious affairs. you'll be" +
