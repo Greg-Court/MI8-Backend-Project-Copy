@@ -158,7 +158,7 @@ public class DataLoader implements ApplicationRunner {
         itemRepo.save(torch);
 
         //item id 2
-        Item multiTool = new Item("multiTool", "This is a Multi-Tool, you can use it to remove screws","Common");
+        Item multiTool = new Item("multitool", "This is a Multi-Tool, you can use it to remove screws","Common");
         itemService.addRoom(multiTool,basement);
         itemRepo.save(multiTool);
 

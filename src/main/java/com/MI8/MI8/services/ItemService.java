@@ -92,7 +92,7 @@ public class ItemService {
                 } else if (roomIn.getRoomName().equals("elevator")) {
                     roomServices.addRoom(roomIn, "basement");
                 } else if (roomIn.getId() == 2) { //if in basement get multitool
-                    playerServices.updateInventory(playerId, "multiTool", true);
+                    playerServices.updateInventory(playerId, "multitool", true);
                 } else if (roomIn.getId() == 6) { //if in security room get the keycard
                     playerServices.updateInventory(playerId, "keycard", true);
                 } else if (roomIn.getId() == 8) { //if in ceo's office get laptop
@@ -103,14 +103,14 @@ public class ItemService {
                 reply.setInventory(ItemService.getItemNames(player.getGame()));
                 reply.setReply(roomIn.getSearchRoomMessage());
                 return new ResponseEntity<>(reply, HttpStatus.OK);
-            case "multiTool":
+            case "multitool":
                 //check the room is lit to use
                 if (roomIn.isLit()) {
                     //remove screws of vent - adds link from basement to vents
                     roomServices.addRoom(roomIn, "airvents");
                     roomRepo.save(roomIn);
                     //remove key
-                    playerServices.updateInventory(playerId, "multiTool", false);
+                    playerServices.updateInventory(playerId, "multitool", false);
                     reply.setRoomsYouCanEnter(roomIn.getNextRooms());
                     reply.setReply("You use the MultiTool to remove the vent cover, you can now squeeze into the vents");
                     return new ResponseEntity<>(reply, HttpStatus.OK);
